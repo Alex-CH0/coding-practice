@@ -26,9 +26,10 @@ public class elevator {
 
         // 올라간다.
         for (int i = currentIndex; i < requestSituation.length; i++) {
-            if(requestSituation[i] == 1)
+            if (requestSituation[i] == 1)
                 floorQueue.add(i);
         }
+        return this.floorQueue;
     }
 
     public int convertFloorToIndex(int floor) {
