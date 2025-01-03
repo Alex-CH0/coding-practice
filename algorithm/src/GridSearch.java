@@ -1,6 +1,62 @@
 import java.util.List;
 
 public class GridSearch {
+
+    public String gridSearchOptimized(List<String> G, List<String> P) {
+        // 테스트케이스 모두 통과한 수정본.
+
+        System.out.println("Start");
+        int gridLength = G.size();
+        int patternLength = P.size();
+        int patternFound = 0;
+
+
+        if(patternLength>gridLength)
+            return "NO";
+
+        gridLoop:
+        for(int i=0;i<=gridLength - patternLength;i++){
+            String firstRow = G.get(i);
+            String firstPattern = P.get(0);
+            if(!firstRow.contains(firstPattern)){
+                System.out.println("!row.contains(pattern)");
+                continue gridLoop;
+            }
+
+            gridRowLoop:
+            for(int j=0;j<=firstRow.length() - firstPattern.length();j++){
+                String firstStep = firstRow.substring(j, firstRow.length());
+                if(!firstStep.startsWith(firstPattern)){
+                    continue gridRowLoop;
+                }
+
+                patternFound=1;
+                int pIndex=1;
+
+                patternLoop:
+                for(int k =i+1; k<i + patternLength; k++){
+                    String row = G.get(k);
+                    String pattern = P.get(pIndex);
+                    String step = row.substring(j, row.length());
+                    if(!step.startsWith(pattern)){
+                        continue gridRowLoop;
+                    }
+                    patternFound++;
+                    pIndex++;
+
+                    if(patternFound==patternLength){
+                        return "YES";
+                    }
+                }
+                continue gridRowLoop;
+            }
+            continue gridLoop;
+        }
+        return "NO";
+
+    }
+
+
     public  String gridSearch(List<String> G, List<String> P) {
         // 테스트 케이스 5개 미통과
 

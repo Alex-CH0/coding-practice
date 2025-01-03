@@ -12,8 +12,7 @@ public class Main {
 
         String a = "44445678";
         String b = "4567";
-        System.out.println(a.indexOf(b));
-
+        System.out.println(a.substring(0,a.length()));
 
 
 
